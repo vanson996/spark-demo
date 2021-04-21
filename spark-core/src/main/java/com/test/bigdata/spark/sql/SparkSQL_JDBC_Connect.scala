@@ -39,11 +39,12 @@ object SparkSQL_JDBC_Connect {
     val dataFrame = sparkSession.read.jdbc("jdbc:mysql://localhost:3306/db_test", "user", properties)
     // 将 dataFrame 转换为 DataSet
     val value: Dataset[User] = dataFrame.as[User](Encoders.product)
-    value.foreach(user=>println(user.name))
+    value.foreach(user => println(user.name))
     value.show()
   }
 
 
+  case class User(id: Int, name: String, age: Int)
+
 }
 
-case class User(id: Int, name: String, age: Int)
